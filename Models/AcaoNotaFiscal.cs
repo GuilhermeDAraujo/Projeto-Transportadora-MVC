@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Projeto_Transportadora_MVC.Enums;
 
 namespace Projeto_Transportadora_MVC.Models
 {
