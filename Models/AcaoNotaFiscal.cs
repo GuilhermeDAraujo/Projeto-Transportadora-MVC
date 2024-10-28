@@ -4,7 +4,7 @@ namespace Projeto_Transportadora_MVC.Models
 {
     public class AcaoNotaFiscal
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Obrigatório informar a ação da Nota Fiscal")]
         public TipoAcao TipoAcao { get; set; }
 
