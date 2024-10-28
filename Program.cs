@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Projeto_Transportadora_MVC.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TransportadoraContext>(options =>
