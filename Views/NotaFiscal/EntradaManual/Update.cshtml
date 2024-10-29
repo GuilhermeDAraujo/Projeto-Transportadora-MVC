@@ -1,0 +1,62 @@
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
+
+<h1 class="text-center my-4">Atualizar Lançamento de Nota Fiscal</h1>
+
+<form asp-action="Update" asp-route-id="@Model.Id" class="container">
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NumeroNotaFiscal" class="form-label fw-bold">Número da Nota Fiscal</label>
+            <input asp-for="NumeroNotaFiscal" class="form-control" placeholder="Ex: 1234567890" />
+            <span asp-validation-for="NumeroNotaFiscal" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NomeCliente" class="form-label fw-bold">Nome do Cliente</label>
+            <input asp-for="NomeCliente" class="form-control" placeholder="Digite o nome completo do cliente" />
+            <span asp-validation-for="NomeCliente" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="EnderecoFaturado" class="form-label fw-bold">Endereço de Faturamento</label>
+            <input asp-for="EnderecoFaturado" class="form-control" placeholder="Ex: Rua das Flores, 123" />
+            <span asp-validation-for="EnderecoFaturado" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NumeroDaCarga" class="form-label fw-bold">Número da Carga</label>
+            <input asp-for="NumeroDaCarga" class="form-control" placeholder="Ex: 123" />
+            <span asp-validation-for="NumeroDaCarga" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="DataDoFaturamento" class="form-label fw-bold">Data de Faturamento</label>
+            <input asp-for="DataDoFaturamento" class="form-control" placeholder="DD/MM/AAAA" />
+            <span asp-validation-for="DataDoFaturamento" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DataDaEntrada" class="form-label fw-bold">Data de Entrada</label>
+            <input asp-for="DataDaEntrada" class="form-control" placeholder="DD/MM/AAAA" />
+            <span asp-validation-for="DataDaEntrada" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary w-100 me-2">Salvar Alterações</button>
+        <a asp-action="Create" class="btn btn-secondary w-100">Voltar</a>
+    </div>
+</form>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        @Html.ValidationSummary(false, "Corrija os seguintes erros: ")
+    </div>
+}

@@ -49,7 +49,7 @@ namespace Projeto_Transportadora_MVC.Controllers
                 ModelState.AddModelError("", "Nota Fiscal não existe");
                 return RedirectToAction(nameof(Menu));
             }
-            return View(notaFiscalBanco);
+            return View("~/Views/NotaFiscal/EntradaManual/Update.cshtml", notaFiscalBanco);
         }
 
         [HttpPost]
@@ -70,7 +70,7 @@ namespace Projeto_Transportadora_MVC.Controllers
             }
 
             await _notaFiscalServices.UpdateNotaFiscalAsync(notaFiscal);
-            return RedirectToAction(nameof(Menu));
+            return RedirectToAction(nameof(Create));
         }
 
 
