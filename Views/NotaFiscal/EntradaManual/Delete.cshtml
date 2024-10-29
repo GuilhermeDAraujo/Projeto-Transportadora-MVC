@@ -1,0 +1,63 @@
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
+
+<h1 class="text-center my-4">Excluir Lançamento de Nota Fiscal</h1>
+
+<div class="container">
+    <div class="alert alert-warning text-center">
+        <p>Você tem certeza de que deseja excluir esta nota fiscal? Esta ação não poderá ser desfeita.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Número da Nota Fiscal</label>
+            <input class="form-control" value="@Model.NumeroNotaFiscal" readonly />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Nome do Cliente</label>
+            <input class="form-control" value="@Model.NomeCliente" readonly />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Endereço de Faturamento</label>
+            <input class="form-control" value="@Model.EnderecoFaturado" readonly />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Número da Carga</label>
+            <input class="form-control" value="@Model.NumeroDaCarga" readonly />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Data de Faturamento</label>
+            <input class="form-control" value="@Model.DataDoFaturamento.ToString("dd/MM/yyyy")" readonly />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Data de Entrada</label>
+            <input class="form-control" value="@Model.DataDaEntrada.ToString("dd/MM/yyyy")" readonly />
+        </div>
+    </div>
+
+    <form asp-action="ConfirmarDelete" asp-route-id="@Model.Id" method="post" onsubmit="return confirmExcluir();">
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-danger w-100 me-2">Confirmar Exclusão</button>
+            <a asp-action="Create" class="btn btn-secondary w-100">Voltar</a>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    function confirmExcluir() {
+        var numeroNotaFiscal = "@Model.NumeroNotaFiscal";
+        var enderecoDeEntrega = "@Model.EnderecoFaturado";
+        var dataFaturamento = "@Model.DataDoFaturamento.ToString("dd/MM/yyyy")";
+
+        var mensagem = `Tem certeza que deseja excluir o Nota Fiscal: \n\nNúmero: ${numeroNotaFiscal}, \nEndereço: ${enderecoDeEntrega}, \nData de Faturamento: ${dataFaturamento}`;
+        return confirm(mensagem);
+    }
+</script>

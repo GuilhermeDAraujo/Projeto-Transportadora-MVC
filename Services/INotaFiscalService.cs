@@ -13,7 +13,7 @@ namespace Projeto_Transportadora_MVC.Services
             _context = context;
         }
 
-        public async Task<NotaFiscal> CreateAsync(NotaFiscal notaFiscal)
+        public async Task<NotaFiscal> CreateNotaFiscalAsync(NotaFiscal notaFiscal)
         {
             if (notaFiscal == null)
                 throw new ArgumentNullException(nameof(notaFiscal));
@@ -31,6 +31,12 @@ namespace Projeto_Transportadora_MVC.Services
             _context.Update(notaFiscal);
             await _context.SaveChangesAsync();
             return notaFiscal;
+        }
+
+        public async Task DeleteNotaFiscalAsync(NotaFiscal notaFiscal)
+        {
+            _context.Remove(notaFiscal);
+            await _context.SaveChangesAsync();
         }
 
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Projeto_Transportadora_MVC.Models;
 using Projeto_Transportadora_MVC.Services;
 
@@ -34,10 +35,10 @@ namespace Projeto_Transportadora_MVC.Controllers
             {
                 await CarregarViewBag();
                 await CarregarViewBagCaminhao();
-                return View(notaFiscal);
+                return View("~/Views/NotaFiscal/EntradaManual/Create.cshtml", notaFiscal);
             }
 
-            await _notaFiscalServices.CreateAsync(notaFiscal);
+            await _notaFiscalServices.CreateNotaFiscalAsync(notaFiscal);
             return RedirectToAction(nameof(Create));
         }
 
@@ -47,7 +48,7 @@ namespace Projeto_Transportadora_MVC.Controllers
             if (notaFiscalBanco == null)
             {
                 ModelState.AddModelError("", "Nota Fiscal não existe");
-                return RedirectToAction(nameof(Menu));
+                return RedirectToAction(nameof(Create));
             }
             return View("~/Views/NotaFiscal/EntradaManual/Update.cshtml", notaFiscalBanco);
         }
@@ -66,10 +67,36 @@ namespace Projeto_Transportadora_MVC.Controllers
             {
                 ModelState.AddModelError("", "Nota Fiscal já existe");
                 await CarregarViewBagCaminhao();
-                return View(notaFiscal);
+                return View("~/Views/NotaFiscal/EntradaManual/Update.cshtml", notaFiscal);
             }
 
             await _notaFiscalServices.UpdateNotaFiscalAsync(notaFiscal);
+            return RedirectToAction(nameof(Create));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var notaFiscalBanco = await _notaFiscalServices.BuscarNotaFiscalPorId(id);
+            if(notaFiscalBanco == null)
+            {
+                ModelState.AddModelError("", "Nota Fiscal não encotrada");
+                return RedirectToAction(nameof(Create));
+            }
+
+            return View("~/Views/NotaFiscal/EntradaManual/Delete.cshtml", notaFiscalBanco);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmarDelete(int id)
+        {
+            var notaFiscalBanco =  await _notaFiscalServices.BuscarNotaFiscalPorId(id);
+            if(notaFiscalBanco == null)
+            {
+                ModelState.AddModelError("", "Nota Fiscal não encontrada");
+                return RedirectToAction(nameof(Create));
+            }
+            await _notaFiscalServices.DeleteNotaFiscalAsync(notaFiscalBanco);
             return RedirectToAction(nameof(Create));
         }
 
