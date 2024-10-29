@@ -1,0 +1,94 @@
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
+
+<h1 class="text-center my-4">Cadastrar Novo Lançamento de Nota Fiscal</h1>
+
+<form asp-action="Create" class="container">
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NumeroNotaFiscal" class="form-label fw-bold">Número da Nota Fiscal</label>
+            <input asp-for="NumeroNotaFiscal" class="form-control" placeholder="Ex: 1234567890" />
+            <span asp-validation-for="NumeroNotaFiscal" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NomeCliente" class="form-label fw-bold">Nome do Cliente</label>
+            <input asp-for="NomeCliente" class="form-control" placeholder="Digite o nome completo do cliente" />
+            <span asp-validation-for="NomeCliente" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="EnderecoFaturado" class="form-label fw-bold">Endereço de Faturamento</label>
+            <input asp-for="EnderecoFaturado" class="form-control" placeholder="Ex: Rua das Flores, 123" />
+            <span asp-validation-for="EnderecoFaturado" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NumeroDaCarga" class="form-label fw-bold">Número da Carga</label>
+            <input asp-for="NumeroDaCarga" class="form-control" placeholder="Ex: 123" />
+            <span asp-validation-for="NumeroDaCarga" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="DataDoFaturamento" class="form-label fw-bold">Data de Faturamento</label>
+            <input asp-for="DataDoFaturamento" class="form-control" placeholder="DD/MM/AAAA" />
+            <span asp-validation-for="DataDoFaturamento" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DataDaEntrada" class="form-label fw-bold">Data de Entrada</label>
+            <input asp-for="DataDaEntrada" class="form-control" placeholder="DD/MM/AAAA" />
+            <span asp-validation-for="DataDaEntrada" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary w-100 me-2">Salvar Lançamento</button>
+            <a asp-action="Menu" class="btn btn-secondary w-100">Cancelar</a>
+        </div>
+</form>
+
+@if (ViewBag.NotasFiscais != null && ViewBag.NotasFiscais.Count > 0)
+{
+    <h2 class="text-center my-4">Notas Fiscais Cadastradas Hoje</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Número da Nota Fiscal</th>
+                <th>Endereço de Faturamento</th>
+                <th>Data do Faturamento</th>
+                <th>Data de Entrada</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nota in ViewBag.NotasFiscais)
+            {
+                <tr>
+                    <td>@nota.NumeroNotaFiscal</td>
+                    <td>@nota.EnderecoFaturado</td>
+                    <td>@nota.DataDoFaturamento.ToString("dd/MM/yyyy")</td>
+                    <td>@nota.DataDaEntrada.ToString("dd/MM/yyyy")</td>
+                    <td class="text-center">
+                        <a asp-action="Update" asp-route-id="@nota.Id" class="btn btn-warning btn-sm me-2">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@nota.Id" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-center mt-4">Nenhuma nota fiscal cadastrada.</p>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger mt-3">
+        @Html.ValidationSummary(false, "Corrija os seguintes erros: ")
+    </div>
+}

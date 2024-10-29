@@ -1,5 +1,12 @@
+/* Importando uma fonte moderna do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 html {
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
+  background-color: #f0f4f8; /* Cor de fundo suave para um efeito espacial */
 }
 
 @media (min-width: 768px) {
@@ -8,15 +15,88 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   margin-bottom: 60px;
+  background-color: #e8eaf6; /* Cor de fundo leve e roxa */
+  color: #333; /* Cor do texto para contraste */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #4a148c; /* Cor de texto roxa escura */
+}
+
+p {
+  line-height: 1.6;
+  color: #333; /* Cor do texto dos parágrafos */
+}
+
+.btn {
+  border-radius: 0.3rem; /* Arredondar bordas dos botões */
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s; /* Adicionar transição suave */
+}
+
+.btn:hover, .btn:focus {
+  background-color: #6a1b9a; /* Cor de fundo do botão quando hover */
+  transform: translateY(-2px); /* Efeito de elevação no hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #8e24aa; /* Cor roxa clara para o botão primário */
+  border-color: #8e24aa;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #7b1fa2; /* Cor roxa escura para hover */
+  border-color: #6a1b9a;
+}
+
+.form-control {
+  border-radius: 0.3rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #8e24aa;
+  box-shadow: 0 0 0 0.2rem rgba(142, 36, 170, 0.25);
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(142, 36, 170, 0.25);
+}
+
+/* Efeito de sombra para caixas */
+.card {
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Cor de fundo das cards */
+}
+
+.card-header {
+  background-color: #8e24aa; /* Cor de fundo do cabeçalho do card */
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  background-color: #e8eaf6; /* Cor de fundo do rodapé do card */
+  border-top: 1px solid #dee2e6;
+}
+
+footer {
+  background-color: #4a148c; /* Cor de fundo do rodapé da página */
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

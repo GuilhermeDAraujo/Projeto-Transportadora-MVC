@@ -22,8 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Guilherme/Projeto Transportadora MVC/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[D:/Guilherme/Projeto Transportadora MVC/Views/Home/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXE1lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Guilherme/Projeto Transportadora MVC/Views/Shared/Error.cshtml]

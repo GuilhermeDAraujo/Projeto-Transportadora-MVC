@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Projeto_Transportadora_MVC.Context;
+using Projeto_Transportadora_MVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,10 @@ builder.Services.AddDbContext<TransportadoraContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<INotaFiscalService>();
+
 
 var app = builder.Build();
 
@@ -28,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Menu}/{id?}");
 
 app.Run();

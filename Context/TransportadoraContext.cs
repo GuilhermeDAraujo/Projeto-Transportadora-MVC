@@ -29,6 +29,14 @@ namespace Projeto_Transportadora_MVC.Context
                 .HasForeignKey(an => an.CaminhaoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Caminhao>()
+                .Property(c => c.CustoCombustivel)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Caminhao>()
+                .Property(c => c.CustoManutencao)
+                .HasColumnType("decimal(18,2)");
+
             base.OnModelCreating(modelBuilder);
         }
     }
