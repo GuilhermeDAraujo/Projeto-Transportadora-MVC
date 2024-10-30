@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Projeto_Transportadora_MVC.Context;
 using Projeto_Transportadora_MVC.Models;
 using Projeto_Transportadora_MVC.Services;
 
@@ -9,10 +9,12 @@ namespace Projeto_Transportadora_MVC.Controllers
     public class NotaFiscalController : Controller
     {
         private readonly INotaFiscalService _notaFiscalServices;
+        private readonly TransportadoraContext _context;
 
-        public NotaFiscalController(INotaFiscalService notaFiscalServices)
+        public NotaFiscalController(INotaFiscalService notaFiscalServices, TransportadoraContext context)
         {
             _notaFiscalServices = notaFiscalServices;
+            _context = context;
         }
 
         public IActionResult Menu()
@@ -98,6 +100,40 @@ namespace Projeto_Transportadora_MVC.Controllers
             }
             await _notaFiscalServices.DeleteNotaFiscalAsync(notaFiscalBanco);
             return RedirectToAction(nameof(Create));
+        }
+
+
+        public IActionResult ImportarNotas()
+        {
+            return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ImportarNotas(IFormFile excelFile)
+        {
+            if(excelFile == null || excelFile.Length == 0)
+            {
+                ModelState.AddModelError("", "Selecione um arquivo válido");
+                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+            }
+            try
+            {
+                using (var stream = excelFile.OpenReadStream())
+                {
+                    var nostasFiscais = _notaFiscalServices.ImportarNotasFiscais(stream);
+
+                    _context.NotasFiscais.AddRange(nostasFiscais);
+                    _context.SaveChanges();
+                }
+                ViewBag.Message = "Notas fiscais importadas com sucesso!";
+                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", $"Erro ao importar: {ex.Message}");
+                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+            }
         }
 
 

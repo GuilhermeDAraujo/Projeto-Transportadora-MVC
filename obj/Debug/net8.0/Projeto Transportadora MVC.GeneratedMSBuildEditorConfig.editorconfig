@@ -18,10 +18,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Guilherme\Projeto Transportadora MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Guilherme/Projeto Transportadora MVC/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Guilherme/Projeto Transportadora MVC/Views/Home/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/ImportarExcel/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxJbXBvcnRhckV4Y2VsXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/Menu.cshtml]

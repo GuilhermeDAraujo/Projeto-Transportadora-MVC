@@ -1,0 +1,23 @@
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
+
+@{
+    ViewData["Title"] = "Importar Notas Fiscais";
+}
+
+<h2>Importar Notas Fiscais</h2>
+
+<form asp-action="ImportarNotas" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="excelFile">Escolha o arquivo Excel:</label>
+        <input type="file" class="form-control" id="excelFile" name="excelFile" accept=".xlsx, .xls" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Importar</button>
+</form>
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3">
+        @ViewBag.Message
+    </div>
+}
