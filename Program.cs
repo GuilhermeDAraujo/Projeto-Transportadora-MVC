@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<INotaFiscalService>();
+builder.Services.AddScoped<IImportarExcelService>();
 
 
 var app = builder.Build();

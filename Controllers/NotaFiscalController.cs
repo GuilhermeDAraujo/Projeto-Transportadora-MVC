@@ -9,12 +9,11 @@ namespace Projeto_Transportadora_MVC.Controllers
     public class NotaFiscalController : Controller
     {
         private readonly INotaFiscalService _notaFiscalServices;
-        private readonly TransportadoraContext _context;
 
-        public NotaFiscalController(INotaFiscalService notaFiscalServices, TransportadoraContext context)
+
+        public NotaFiscalController(INotaFiscalService notaFiscalServices)
         {
             _notaFiscalServices = notaFiscalServices;
-            _context = context;
         }
 
         public IActionResult Menu()
@@ -100,40 +99,6 @@ namespace Projeto_Transportadora_MVC.Controllers
             }
             await _notaFiscalServices.DeleteNotaFiscalAsync(notaFiscalBanco);
             return RedirectToAction(nameof(CreateNotaFiscal));
-        }
-
-
-        public IActionResult CreateImportarExcel()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateImportarExcel(IFormFile excelFile)
-        {
-            if(excelFile == null || excelFile.Length == 0)
-            {
-                ModelState.AddModelError("", "Selecione um arquivo válido");
-                return View();
-            }
-            try
-            {
-                using (var stream = excelFile.OpenReadStream())
-                {
-                    var nostasFiscais = _notaFiscalServices.ImportarNotasFiscais(stream);
-
-                    _context.NotasFiscais.AddRange(nostasFiscais);
-                    _context.SaveChanges();
-                }
-                ViewBag.Message = "Notas fiscais importadas com sucesso!";
-                return View();
-            }
-            catch(Exception ex)
-            {
-                ModelState.AddModelError("", $"Erro ao importar: {ex.Message}");
-                return View();
-            }
         }
 
 
