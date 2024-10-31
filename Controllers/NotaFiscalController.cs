@@ -22,42 +22,42 @@ namespace Projeto_Transportadora_MVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> CreateNotaFiscal()
         {
             await CarregarViewBag();
             await CarregarViewBagCaminhao();
-            return View("~/Views/NotaFiscal/EntradaManual/Create.cshtml");
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NotaFiscal notaFiscal)
+        public async Task<IActionResult> CreateNotaFiscal(NotaFiscal notaFiscal)
         {
             if (!ModelState.IsValid)
             {
                 await CarregarViewBag();
                 await CarregarViewBagCaminhao();
-                return View("~/Views/NotaFiscal/EntradaManual/Create.cshtml", notaFiscal);
+                return View(notaFiscal);
             }
 
             await _notaFiscalServices.CreateNotaFiscalAsync(notaFiscal);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(CreateNotaFiscal));
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> UpdateNotaFiscal(int id)
         {
             var notaFiscalBanco = await _notaFiscalServices.BuscarNotaFiscalPorId(id);
             if (notaFiscalBanco == null)
             {
                 ModelState.AddModelError("", "Nota Fiscal não existe");
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(CreateNotaFiscal));
             }
-            return View("~/Views/NotaFiscal/EntradaManual/Update.cshtml", notaFiscalBanco);
+            return View(notaFiscalBanco);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(NotaFiscal notaFiscal)
+        public async Task<IActionResult> UpdateNotaFiscal(NotaFiscal notaFiscal)
         {
             if (!ModelState.IsValid)
             {
@@ -69,23 +69,23 @@ namespace Projeto_Transportadora_MVC.Controllers
             {
                 ModelState.AddModelError("", "Nota Fiscal já existe");
                 await CarregarViewBagCaminhao();
-                return View("~/Views/NotaFiscal/EntradaManual/Update.cshtml", notaFiscal);
+                return View(notaFiscal);
             }
 
             await _notaFiscalServices.UpdateNotaFiscalAsync(notaFiscal);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(CreateNotaFiscal));
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteNotaFiscal(int id)
         {
             var notaFiscalBanco = await _notaFiscalServices.BuscarNotaFiscalPorId(id);
             if(notaFiscalBanco == null)
             {
                 ModelState.AddModelError("", "Nota Fiscal não encotrada");
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(CreateNotaFiscal));
             }
 
-            return View("~/Views/NotaFiscal/EntradaManual/Delete.cshtml", notaFiscalBanco);
+            return View(notaFiscalBanco);
         }
 
         [HttpPost]
@@ -96,26 +96,26 @@ namespace Projeto_Transportadora_MVC.Controllers
             if(notaFiscalBanco == null)
             {
                 ModelState.AddModelError("", "Nota Fiscal não encontrada");
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(CreateNotaFiscal));
             }
             await _notaFiscalServices.DeleteNotaFiscalAsync(notaFiscalBanco);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(CreateNotaFiscal));
         }
 
 
-        public IActionResult ImportarNotas()
+        public IActionResult CreateImportarExcel()
         {
-            return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ImportarNotas(IFormFile excelFile)
+        public IActionResult CreateImportarExcel(IFormFile excelFile)
         {
             if(excelFile == null || excelFile.Length == 0)
             {
                 ModelState.AddModelError("", "Selecione um arquivo válido");
-                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+                return View();
             }
             try
             {
@@ -127,12 +127,12 @@ namespace Projeto_Transportadora_MVC.Controllers
                     _context.SaveChanges();
                 }
                 ViewBag.Message = "Notas fiscais importadas com sucesso!";
-                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+                return View();
             }
             catch(Exception ex)
             {
                 ModelState.AddModelError("", $"Erro ao importar: {ex.Message}");
-                return View("~/Views/NotaFiscal/ImportarExcel/Create.cshtml");
+                return View();
             }
         }
 

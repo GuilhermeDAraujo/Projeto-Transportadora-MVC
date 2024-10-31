@@ -22,28 +22,24 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXENyZWF0ZS5jc2h0bWw=
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/CreateImportarExcel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxDcmVhdGVJbXBvcnRhckV4Y2VsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXERlbGV0ZS5jc2h0bWw=
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/CreateNotaFiscal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxDcmVhdGVOb3RhRmlzY2FsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Menu.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXE1lbnUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/EntradaManual/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxFbnRyYWRhTWFudWFsXFVwZGF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/ImportarExcel/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxJbXBvcnRhckV4Y2VsXENyZWF0ZS5jc2h0bWw=
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/DeleteNotaFiscal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxEZWxldGVOb3RhRmlzY2FsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxNZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Guilherme/Projeto Transportadora MVC/Views/NotaFiscal/UpdateNotaFiscal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90YUZpc2NhbFxVcGRhdGVOb3RhRmlzY2FsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Guilherme/Projeto Transportadora MVC/Views/Shared/Error.cshtml]
