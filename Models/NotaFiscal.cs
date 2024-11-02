@@ -16,17 +16,17 @@ namespace Projeto_Transportadora_MVC.Models
         [StringLength(50, MinimumLength = 5, ErrorMessage = "{0} deve conter entre {2} e {1} caracteres")]
         public string EnderecoFaturado { get; set; }
 
-        [Required(ErrorMessage = "Informe a data de faturamento da Nota Fiscal")]
+        [Required(ErrorMessage = "Informe a data de faturamento")]
         [DataType(DataType.Date)]
-        public DateTime DataDoFaturamento { get; set; }
+        public DateTime? DataDoFaturamento { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.
 
-        [Required(ErrorMessage = "Informe a data de entrada da Nota Fiscal")]
+        [Required(ErrorMessage = "Informe a data de entrada")]
         [DataType(DataType.Date)]
-        public DateTime DataDaEntrada { get; set; }
+        public DateTime? DataDaEntrada { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.
 
         [Required(ErrorMessage = "Informe o número da carga da Nota Fiscal")]
         [Range(10, 999)]
-        public int NumeroDaCarga { get; set; }
+        public int? NumeroDaCarga { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.
 
 
         public ICollection<AcaoNotaFiscal> Acoes { get; set; } = new List<AcaoNotaFiscal>();

@@ -31,6 +31,11 @@ namespace Projeto_Transportadora_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateNotaFiscal(NotaFiscal notaFiscal)
         {
+            if (notaFiscal.NumeroNotaFiscal <= 0)
+            {
+                ModelState.AddModelError("NumeroNotaFiscal", "Informe o número da Nota Fiscal");
+            }
+
             if (!ModelState.IsValid)
             {
                 await CarregarViewBag();
@@ -57,6 +62,11 @@ namespace Projeto_Transportadora_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateNotaFiscal(NotaFiscal notaFiscal)
         {
+            if (notaFiscal.NumeroNotaFiscal <= 0)
+            {
+                ModelState.AddModelError("NumeroNotaFiscal", "Informe o número da Nota Fiscal");
+            }
+
             if (!ModelState.IsValid)
             {
                 await CarregarViewBagCaminhao();
@@ -110,6 +120,14 @@ namespace Projeto_Transportadora_MVC.Controllers
         public async Task CarregarViewBag()
         {
             ViewBag.NotasFiscais = await _notaFiscalServices.ObjerNotasFiscaisDeHojeAsync();
+        }
+
+        public async Task ValidarNumeroNotaFiscal(NotaFiscal numeroNotaFiscal)
+        {
+            if (numeroNotaFiscal.NumeroNotaFiscal <= 0)
+            {
+                ModelState.AddModelError("", "Informe o número da Nota Fiscal");
+            }
         }
     }
 }

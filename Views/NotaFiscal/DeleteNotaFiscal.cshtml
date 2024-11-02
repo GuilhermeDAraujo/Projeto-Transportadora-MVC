@@ -34,12 +34,12 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label class="form-label fw-bold">Data de Faturamento</label>
-            <input class="form-control" value="@Model.DataDoFaturamento.ToString("dd/MM/yyyy")" readonly />
+            <input class="form-control" value="@Model.DataDoFaturamento" readonly />
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label fw-bold">Data de Entrada</label>
-            <input class="form-control" value="@Model.DataDaEntrada.ToString("dd/MM/yyyy")" readonly />
+            <input class="form-control" value="@Model.DataDaEntrada" readonly />
         </div>
     </div>
 
@@ -55,7 +55,7 @@
     function confirmExcluir() {
         var numeroNotaFiscal = "@Model.NumeroNotaFiscal";
         var enderecoDeEntrega = "@Model.EnderecoFaturado";
-        var dataFaturamento = "@Model.DataDoFaturamento.ToString("dd/MM/yyyy")";
+        var dataFaturamento = "@Model.DataDoFaturamento";
 
         var mensagem = `Tem certeza que deseja excluir o Nota Fiscal: \n\nNúmero: ${numeroNotaFiscal}, \nEndereço: ${enderecoDeEntrega}, \nData de Faturamento: ${dataFaturamento}`;
         return confirm(mensagem);
