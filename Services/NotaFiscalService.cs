@@ -5,11 +5,11 @@ using Projeto_Transportadora_MVC.Models;
 
 namespace Projeto_Transportadora_MVC.Services
 {
-    public class INotaFiscalService
+    public class NotaFiscalService
     {
         private readonly TransportadoraContext _context;
 
-        public INotaFiscalService(TransportadoraContext context)
+        public NotaFiscalService(TransportadoraContext context)
         {
             _context = context;
         }
@@ -93,7 +93,7 @@ namespace Projeto_Transportadora_MVC.Services
             }
         }
 
-        public async Task<List<NotaFiscal>> ObjerNotasFiscaisDeHojeAsync()
+        public async Task<List<NotaFiscal>> ObterjerNotasFiscaisDeHojeAsync()
         {
             var hoje = DateTime.Today;
 

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using Projeto_Transportadora_MVC.Context;
 using Projeto_Transportadora_MVC.Services;
 
@@ -7,13 +8,11 @@ namespace Projeto_Transportadora_MVC.Controllers
     public class ImportarExcelController : Controller
     {
         private readonly IImportarExcelService _importarExcelService;
-        private readonly TransportadoraContext _context;
 
 
-        public ImportarExcelController(IImportarExcelService importarExcelService, TransportadoraContext context)
+        public ImportarExcelController(IImportarExcelService importarExcelService)
         {
             _importarExcelService = importarExcelService;
-            _context = context;
         }
 
         public IActionResult CreateImportarExcel()
@@ -35,12 +34,9 @@ namespace Projeto_Transportadora_MVC.Controllers
                 using (var stream = excelFile.OpenReadStream())
                 {
                     var nostasFiscais = _importarExcelService.ImportarNotasFiscais(stream);
-
-                    _context.NotasFiscais.AddRange(nostasFiscais);
-                    _context.SaveChanges();
+                    ViewBag.Message = $"{nostasFiscais.Count} Notas fiscais importadas com sucesso!";
+                    return View();
                 }
-                ViewBag.Message = "Notas fiscais importadas com sucesso!";
-                return View();
             }
             catch (Exception ex)
             {

@@ -11,7 +11,7 @@ builder.Services.AddDbContext<TransportadoraContext>(options =>
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddScoped<INotaFiscalService>();
+builder.Services.AddScoped<NotaFiscalService>();
 builder.Services.AddScoped<IImportarExcelService>();
 
 

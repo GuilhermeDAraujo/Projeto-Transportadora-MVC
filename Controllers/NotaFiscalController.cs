@@ -7,10 +7,10 @@ namespace Projeto_Transportadora_MVC.Controllers
 {
     public class NotaFiscalController : Controller
     {
-        private readonly INotaFiscalService _notaFiscalServices;
+        private readonly NotaFiscalService _notaFiscalServices;
 
 
-        public NotaFiscalController(INotaFiscalService notaFiscalServices)
+        public NotaFiscalController(NotaFiscalService notaFiscalServices)
         {
             _notaFiscalServices = notaFiscalServices;
         }
@@ -23,7 +23,6 @@ namespace Projeto_Transportadora_MVC.Controllers
         public async Task<IActionResult> CreateNotaFiscal()
         {
             await CarregarViewBag();
-            await CarregarViewBagCaminhao();
             return View();
         }
 
@@ -31,15 +30,14 @@ namespace Projeto_Transportadora_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateNotaFiscal(NotaFiscal notaFiscal)
         {
-            if (notaFiscal.NumeroNotaFiscal <= 0)
+            if (!ValidarNumeroNotaFiscal(notaFiscal.NumeroNotaFiscal))
             {
-                ModelState.AddModelError("NumeroNotaFiscal", "Informe o número da Nota Fiscal");
+                ModelState.AddModelError("", "Informe o número da Nota Fiscal");
             }
 
             if (!ModelState.IsValid)
             {
                 await CarregarViewBag();
-                await CarregarViewBagCaminhao();
                 return View(notaFiscal);
             }
 
@@ -62,21 +60,21 @@ namespace Projeto_Transportadora_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateNotaFiscal(NotaFiscal notaFiscal)
         {
-            if (notaFiscal.NumeroNotaFiscal <= 0)
+            if (!ValidarNumeroNotaFiscal(notaFiscal.NumeroNotaFiscal))
             {
-                ModelState.AddModelError("NumeroNotaFiscal", "Informe o número da Nota Fiscal");
+                ModelState.AddModelError("", "Informe o número da Nota Fiscal");
             }
 
             if (!ModelState.IsValid)
             {
-                await CarregarViewBagCaminhao();
+                await CarregarViewBag();
                 return View(notaFiscal);
             }
 
             if (await _notaFiscalServices.NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal))
             {
                 ModelState.AddModelError("", "Nota Fiscal com o mesmo número já cadastrada.");
-                await CarregarViewBagCaminhao();
+                await CarregarViewBag();
                 return View(notaFiscal);
             }
 
@@ -111,23 +109,19 @@ namespace Projeto_Transportadora_MVC.Controllers
             return RedirectToAction(nameof(CreateNotaFiscal));
         }
 
-
-        public async Task CarregarViewBagCaminhao()
-        {
-            ViewBag.Caminhao = new SelectList(await _notaFiscalServices.ListarTodosCaminhoesAsync(), "id", "Placa");
-        }
-
         public async Task CarregarViewBag()
         {
-            ViewBag.NotasFiscais = await _notaFiscalServices.ObjerNotasFiscaisDeHojeAsync();
+            ViewBag.Caminhao = new SelectList(await _notaFiscalServices.ListarTodosCaminhoesAsync(), "id", "Placa");
+            ViewBag.NotasFiscais = await _notaFiscalServices.ObterjerNotasFiscaisDeHojeAsync();
         }
 
-        public async Task ValidarNumeroNotaFiscal(NotaFiscal numeroNotaFiscal)
+        public bool ValidarNumeroNotaFiscal(int numeroNotaFiscal)
         {
-            if (numeroNotaFiscal.NumeroNotaFiscal <= 0)
+            if (numeroNotaFiscal <= 0)
             {
-                ModelState.AddModelError("", "Informe o número da Nota Fiscal");
+                return false;
             }
+            return true;
         }
     }
 }
