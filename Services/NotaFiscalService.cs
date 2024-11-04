@@ -81,11 +81,11 @@ namespace Projeto_Transportadora_MVC.Services
             }
         }
 
-        public async Task<bool> NotaFiscalJaExisteAsync(int numeroNotaFiscal)
+        public async Task<bool> NotaFiscalJaExisteAsync(int numeroNotaFiscal, int? idNotaFiscal = null)
         {
             try
             {
-                return await _context.NotasFiscais.AnyAsync(nf => nf.NumeroNotaFiscal == numeroNotaFiscal);
+                return await _context.NotasFiscais.AnyAsync(nf => nf.NumeroNotaFiscal == numeroNotaFiscal && nf.Id != idNotaFiscal);
             }
             catch (Exception ex)
             {

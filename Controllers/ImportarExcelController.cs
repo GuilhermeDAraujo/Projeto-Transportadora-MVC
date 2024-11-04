@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using OfficeOpenXml;
-using Projeto_Transportadora_MVC.Context;
 using Projeto_Transportadora_MVC.Services;
 
 namespace Projeto_Transportadora_MVC.Controllers

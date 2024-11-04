@@ -71,7 +71,7 @@ namespace Projeto_Transportadora_MVC.Controllers
                 return View(notaFiscal);
             }
 
-            if (await _notaFiscalServices.NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal))
+            if (await _notaFiscalServices.NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal, notaFiscal.Id))
             {
                 ModelState.AddModelError("", "Nota Fiscal com o mesmo número já cadastrada.");
                 await CarregarViewBag();
