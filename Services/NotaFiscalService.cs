@@ -26,12 +26,31 @@ namespace Projeto_Transportadora_MVC.Services
             {
                 _context.NotasFiscais.Add(notaFiscal);
                 await _context.SaveChangesAsync();
+
+                await CreateAcaoNotaFiscalAsync(notaFiscal);
                 return notaFiscal;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro ao criar Nota Fiscal", ex);
             }
+        }
+
+        private async Task CreateAcaoNotaFiscalAsync(NotaFiscal notaFiscal)
+        {
+            var acaoNotaFiscal = new AcaoNotaFiscal
+            {
+                TipoAcao = Enums.TipoAcao.Entrada,
+                DataDaAcao = DateTime.Now.Date,
+                Descriacao = "Entrada da Nota Fiscal e aguardando ação",
+                NotaFiscalId = notaFiscal.Id,
+                CaminhaoId = 1,
+                DataAgendada = null,
+                StatusAgendamento = null
+            };
+
+            _context.AcoesNotaFiscal.Add(acaoNotaFiscal);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<NotaFiscal> UpdateNotaFiscalAsync(NotaFiscal notaFiscal)
@@ -99,8 +118,16 @@ namespace Projeto_Transportadora_MVC.Services
 
             try
             {
-                return await _context.NotasFiscais
-                    .Where(nf => nf.DataDaEntrada == hoje)
+                return await _context.AcoesNotaFiscal
+                    .Where(a => a.TipoAcao == Enums.TipoAcao.Entrada && a.DataDaAcao == hoje)
+                    .Select(a => new NotaFiscal
+                    {
+                        Id = a.NotaFiscal.Id,
+                        NumeroNotaFiscal = a.NotaFiscal.NumeroNotaFiscal,
+                        EnderecoFaturado = a.NotaFiscal.EnderecoFaturado,
+                        DataDoFaturamento = a.NotaFiscal.DataDoFaturamento,
+                        
+                    })
                     .ToListAsync();
             }
             catch (Exception ex)

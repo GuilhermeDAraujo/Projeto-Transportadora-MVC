@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto_Transportadora_MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class CriandoTabelasProjetoTransportadoraMVC : Migration
+    public partial class CriacaoDasTabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace Projeto_Transportadora_MVC.Migrations
                 name: "Caminhoes",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Placa = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
                     CustoCombustivel = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -23,7 +23,7 @@ namespace Projeto_Transportadora_MVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Caminhoes", x => x.id);
+                    table.PrimaryKey("PK_Caminhoes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,18 +36,11 @@ namespace Projeto_Transportadora_MVC.Migrations
                     NomeCliente = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EnderecoFaturado = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DataDoFaturamento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataDaEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumeroDaCarga = table.Column<int>(type: "int", nullable: false),
-                    Caminhaoid = table.Column<int>(type: "int", nullable: true)
+                    NumeroDaCarga = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NotasFiscais", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NotasFiscais_Caminhoes_Caminhaoid",
-                        column: x => x.Caminhaoid,
-                        principalTable: "Caminhoes",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -71,7 +64,7 @@ namespace Projeto_Transportadora_MVC.Migrations
                         name: "FK_AcoesNotaFiscal_Caminhoes_CaminhaoId",
                         column: x => x.CaminhaoId,
                         principalTable: "Caminhoes",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AcoesNotaFiscal_NotasFiscais_NotaFiscalId",
@@ -85,14 +78,14 @@ namespace Projeto_Transportadora_MVC.Migrations
                 name: "Fechamentos",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataDoFechamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NotaFiscalId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fechamentos", x => x.id);
+                    table.PrimaryKey("PK_Fechamentos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Fechamentos_NotasFiscais_NotaFiscalId",
                         column: x => x.NotaFiscalId,
@@ -115,11 +108,6 @@ namespace Projeto_Transportadora_MVC.Migrations
                 name: "IX_Fechamentos_NotaFiscalId",
                 table: "Fechamentos",
                 column: "NotaFiscalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NotasFiscais_Caminhaoid",
-                table: "NotasFiscais",
-                column: "Caminhaoid");
         }
 
         /// <inheritdoc />
@@ -132,10 +120,10 @@ namespace Projeto_Transportadora_MVC.Migrations
                 name: "Fechamentos");
 
             migrationBuilder.DropTable(
-                name: "NotasFiscais");
+                name: "Caminhoes");
 
             migrationBuilder.DropTable(
-                name: "Caminhoes");
+                name: "NotasFiscais");
         }
     }
 }

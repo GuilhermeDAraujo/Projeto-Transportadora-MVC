@@ -11,7 +11,9 @@ namespace Projeto_Transportadora_MVC.Enums
         [Display(Name = "Devolução para Matriz")] DevolucaoParaMatriz = 5, 
         [Display(Name = "Aguardando Ação")] AgendarEntrega = 6,
         [Display(Name = "Saída no Fechamento")] SaidaNoFechamento = 7, 
-        [Display(Name = "Aguardando Ação")] AguardandoAcao = 8
+        [Display(Name = "Aguardando Ação")] AguardandoAcao = 8,
+        [Display(Name = "Aguardando Ação")] Entrada
+
     }
 
     public enum StatusAgendamento

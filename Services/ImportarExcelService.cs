@@ -33,7 +33,7 @@ namespace Projeto_Transportadora_MVC.Services
                         NomeCliente = planilha.Cells[linha, 2].Text,
                         EnderecoFaturado = planilha.Cells[linha, 3].Text,
                         DataDoFaturamento = DateTime.Parse(planilha.Cells[linha, 4].Text),
-                        DataDaEntrada = DateTime.Parse(planilha.Cells[linha, 5].Text),
+                        // DataDaEntrada = DateTime.Parse(planilha.Cells[linha, 5].Text),
                         NumeroDaCarga = int.Parse(planilha.Cells[linha, 6].Text)
                     };
 

@@ -20,10 +20,6 @@ namespace Projeto_Transportadora_MVC.Models
         [DataType(DataType.Date)]
         public DateTime? DataDoFaturamento { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.
 
-        [Required(ErrorMessage = "Informe a data de entrada")]
-        [DataType(DataType.Date)]
-        public DateTime? DataDaEntrada { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.
-
         [Required(ErrorMessage = "Informe o número da carga da Nota Fiscal")]
         [Range(10, 999)]
         public int? NumeroDaCarga { get; set; } //Atributo como nulo, permitindo que o modelo trate valores vazios corretamente.

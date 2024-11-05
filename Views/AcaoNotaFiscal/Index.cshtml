@@ -7,24 +7,14 @@
 
 <form method="get" class="mb-4">
     <div class="row">
-        <div class="col-md-3">
-            <label for="caminhao" class="form-label">Caminhão</label>
-            <select id="caminhao" name="caminhao" class="form-select">
-                <option value="">Todos</option>
-                @foreach (var caminhao in ViewBag.Caminhao)
-                {
-                    <option value="@caminhao.Value">@caminhao.Text</option>
-                }
-            </select>
-        </div>
 
         <div class="col-md-3">
-            <label for="status" class="form-label">Status de Agendamento</label>
-            <select id="status" name="status" class="form-select">
+            <label for="tipoAcao" class="form-label">Status da Ação</label>
+            <select id="tipoAcao" name="tipoAcao" class="form-select">
                 <option value="">Todos</option>
-                @foreach (var status in ViewBag.TipoAcao)
+                @foreach (var tipo in ViewBag.TipoAcao)
                 {
-                    <option value="@status.Value">@status.Text</option>
+                    <option value="@tipo.Value">@tipo.Text</option>
                 }
             </select>
         </div>

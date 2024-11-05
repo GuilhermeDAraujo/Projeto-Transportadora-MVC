@@ -24,12 +24,14 @@ namespace Projeto_Transportadora_MVC.Services
                 .ToListAsync();
         }
 
-        public async Task<AcaoNotaFiscal> ObterPorIdAsync(int id)
+        public async Task<IEnumerable<AcaoNotaFiscal>> ObterNotasPorTipoAcaoEDataFaturamentoAsync(TipoAcao? tipoAcao, DateTime? dataFaturamento)
         {
             return await _context.AcoesNotaFiscal
+                .Where(a => !tipoAcao.HasValue || a.TipoAcao == tipoAcao.Value)
+                .Where(a => !dataFaturamento.HasValue || a.NotaFiscal.DataDoFaturamento == dataFaturamento.Value)
                 .Include(nf => nf.NotaFiscal)
                 .Include(c => c.Caminhao)
-                .FirstOrDefaultAsync(a => a.Id == id);
+                .ToListAsync();
         }
 
         public async Task CriarAcaoAsync(AcaoNotaFiscal acaoNotaFiscal)

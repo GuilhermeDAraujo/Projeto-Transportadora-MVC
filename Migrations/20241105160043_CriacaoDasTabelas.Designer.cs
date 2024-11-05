@@ -12,8 +12,8 @@ using Projeto_Transportadora_MVC.Context;
 namespace Projeto_Transportadora_MVC.Migrations
 {
     [DbContext(typeof(TransportadoraContext))]
-    [Migration("20241029003115_CriandoTabelasProjetoTransportadoraMVC")]
-    partial class CriandoTabelasProjetoTransportadoraMVC
+    [Migration("20241105160043_CriacaoDasTabelas")]
+    partial class CriacaoDasTabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,11 +67,11 @@ namespace Projeto_Transportadora_MVC.Migrations
 
             modelBuilder.Entity("Projeto_Transportadora_MVC.Models.Caminhao", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal?>("CustoCombustivel")
                         .HasColumnType("decimal(18,2)");
@@ -84,18 +84,18 @@ namespace Projeto_Transportadora_MVC.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("nvarchar(7)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Caminhoes");
                 });
 
             modelBuilder.Entity("Projeto_Transportadora_MVC.Models.Fechamento", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataDoFechamento")
                         .HasColumnType("datetime2");
@@ -103,7 +103,7 @@ namespace Projeto_Transportadora_MVC.Migrations
                     b.Property<int>("NotaFiscalId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("NotaFiscalId");
 
@@ -118,13 +118,8 @@ namespace Projeto_Transportadora_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Caminhaoid")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataDaEntrada")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataDoFaturamento")
+                    b.Property<DateTime?>("DataDoFaturamento")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EnderecoFaturado")
@@ -137,15 +132,14 @@ namespace Projeto_Transportadora_MVC.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumeroDaCarga")
+                    b.Property<int?>("NumeroDaCarga")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("NumeroNotaFiscal")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Caminhaoid");
 
                     b.ToTable("NotasFiscais");
                 });
@@ -178,18 +172,6 @@ namespace Projeto_Transportadora_MVC.Migrations
                         .IsRequired();
 
                     b.Navigation("NotaFiscal");
-                });
-
-            modelBuilder.Entity("Projeto_Transportadora_MVC.Models.NotaFiscal", b =>
-                {
-                    b.HasOne("Projeto_Transportadora_MVC.Models.Caminhao", null)
-                        .WithMany("NotasFiscais")
-                        .HasForeignKey("Caminhaoid");
-                });
-
-            modelBuilder.Entity("Projeto_Transportadora_MVC.Models.Caminhao", b =>
-                {
-                    b.Navigation("NotasFiscais");
                 });
 
             modelBuilder.Entity("Projeto_Transportadora_MVC.Models.NotaFiscal", b =>
