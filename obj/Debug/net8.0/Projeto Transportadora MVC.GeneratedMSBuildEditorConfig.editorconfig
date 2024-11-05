@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Guilherme\Projeto Transportadora MVC
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Guilherme/Projeto Transportadora MVC/Views/AcaoNotaFiscal/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNhb05vdGFGaXNjYWxcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Guilherme/Projeto Transportadora MVC/Views/Home/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

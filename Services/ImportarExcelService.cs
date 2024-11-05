@@ -5,11 +5,11 @@ using Projeto_Transportadora_MVC.Models;
 
 namespace Projeto_Transportadora_MVC.Services
 {
-    public class IImportarExcelService
+    public class ImportarExcelService
     {
         private readonly TransportadoraContext _context;
 
-        public IImportarExcelService(TransportadoraContext context)
+        public ImportarExcelService(TransportadoraContext context)
         {
             _context = context;
         }

@@ -12,7 +12,8 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddScoped<NotaFiscalService>();
-builder.Services.AddScoped<IImportarExcelService>();
+builder.Services.AddScoped<ImportarExcelService>();
+builder.Services.AddScoped<AcaoNotaFiscalService>();
 
 
 var app = builder.Build();

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Projeto_Transportadora_MVC.Context;
+using Projeto_Transportadora_MVC.Enums;
 using Projeto_Transportadora_MVC.Models;
 
 namespace Projeto_Transportadora_MVC.Services
@@ -40,6 +42,23 @@ namespace Projeto_Transportadora_MVC.Services
         {
             _context.AcoesNotaFiscal.Update(acaoNotaFiscal);
             await _context.SaveChangesAsync();
+        }
+
+        public List<SelectListItem> BuscarPorStatus()
+        {
+            return Enum.GetValues(typeof(TipoAcao))
+                .Cast<TipoAcao>()
+                .Select(t => new SelectListItem
+                {
+                    Value = t.ToString(),
+                    Text = t.ToString()
+                })
+                .ToList();
+        }
+
+        public async Task<List<Caminhao>> BuscarCaminhao()
+        {
+            return await _context.Caminhoes.ToListAsync();
         }
     }
 }

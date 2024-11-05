@@ -1,0 +1,73 @@
+@model IEnumerable<Projeto_Transportadora_MVC.Models.AcaoNotaFiscal>
+@{
+    ViewData["Title"] = "Movimentações de Notas Fiscais (Exceto Fechamento)";
+}
+
+<h2>Movimentações de Notas Fiscais (Exceto Fechamento)</h2>
+
+<form method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="caminhao" class="form-label">Caminhão</label>
+            <select id="caminhao" name="caminhao" class="form-select">
+                <option value="">Todos</option>
+                @foreach (var caminhao in ViewBag.Caminhao)
+                {
+                    <option value="@caminhao.Value">@caminhao.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="status" class="form-label">Status de Agendamento</label>
+            <select id="status" name="status" class="form-select">
+                <option value="">Todos</option>
+                @foreach (var status in ViewBag.TipoAcao)
+                {
+                    <option value="@status.Value">@status.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="dataFaturamento" class="form-label">Data do Faturamento</label>
+            <input type="date" id="dataFaturamento" name="dataFaturamento" class="form-control" />
+        </div>
+
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nota Fiscal</th>
+            <th>Ação</th>
+            <th>Data da Ação</th>
+            <th>Endereço Faturado</th>
+            <th>Data do Faturamento</th>
+            <th>Caminhão</th>
+            <th>Status de Agendamento</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nota in Model)
+        {
+            <tr>
+                <td>@nota.NotaFiscal.NumeroNotaFiscal</td>
+                <td>@nota.TipoAcao</td>
+                <td>@nota.DataDaAcao.ToShortDateString()</td>
+                <td>@nota.NotaFiscal.EnderecoFaturado</td>
+                <td>@nota.NotaFiscal.DataDoFaturamento?.ToShortDateString()</td>
+                <td>@nota.Caminhao.Placa</td>
+                <td>@nota.StatusAgendamento</td>
+                <td>
+                    <a asp-action="Detalhes" asp-route-id="@nota.Id" class="btn btn-info btn-sm">Detalhes</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

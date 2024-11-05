@@ -5,10 +5,10 @@ namespace Projeto_Transportadora_MVC.Controllers
 {
     public class ImportarExcelController : Controller
     {
-        private readonly IImportarExcelService _importarExcelService;
+        private readonly ImportarExcelService _importarExcelService;
 
 
-        public ImportarExcelController(IImportarExcelService importarExcelService)
+        public ImportarExcelController(ImportarExcelService importarExcelService)
         {
             _importarExcelService = importarExcelService;
         }
