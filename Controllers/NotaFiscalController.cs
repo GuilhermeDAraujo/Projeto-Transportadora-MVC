@@ -41,8 +41,15 @@ namespace Projeto_Transportadora_MVC.Controllers
                 return View(notaFiscal);
             }
 
+            if (await _notaFiscalServices.VerificarNotaJaCadastradaCreateAsync(notaFiscal.NumeroNotaFiscal))
+            {
+                ModelState.AddModelError("", "Nota Fiscal com o mesmo número já cadastrada.");
+                await CarregarViewBag();
+                return View(notaFiscal);
+            }
             await _notaFiscalServices.CreateNotaFiscalAsync(notaFiscal);
             return RedirectToAction(nameof(CreateNotaFiscal));
+
         }
 
         public async Task<IActionResult> UpdateNotaFiscal(int id)
@@ -71,15 +78,14 @@ namespace Projeto_Transportadora_MVC.Controllers
                 return View(notaFiscal);
             }
 
-            if (await _notaFiscalServices.NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal, notaFiscal.Id))
+            if (await _notaFiscalServices.VerificarNotaJaCadastradaUpdateAsync(notaFiscal.NumeroNotaFiscal, notaFiscal.Id))
             {
-                ModelState.AddModelError("", "Nota Fiscal com o mesmo número já cadastrada.");
-                await CarregarViewBag();
-                return View(notaFiscal);
+                await _notaFiscalServices.UpdateNotaFiscalAsync(notaFiscal);
+                return RedirectToAction(nameof(CreateNotaFiscal));
             }
-
-            await _notaFiscalServices.UpdateNotaFiscalAsync(notaFiscal);
-            return RedirectToAction(nameof(CreateNotaFiscal));
+            ModelState.AddModelError("", "Nota Fiscal com o mesmo número já cadastrada.");
+            await CarregarViewBag();
+            return View(notaFiscal);
 
         }
 

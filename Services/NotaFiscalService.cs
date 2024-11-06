@@ -19,7 +19,7 @@ namespace Projeto_Transportadora_MVC.Services
             if (notaFiscal == null)
                 throw new ArgumentNullException(nameof(notaFiscal));
 
-            if (await NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal))
+            if (await VerificarNotaJaCadastradaCreateAsync(notaFiscal.NumeroNotaFiscal))
                 throw new InvalidOperationException("Nota Fiscal já existe");
 
             try
@@ -58,7 +58,7 @@ namespace Projeto_Transportadora_MVC.Services
             if (notaFiscal == null)
                 throw new ArgumentException("Nota Fiscal inválida");
 
-            if (await NotaFiscalJaExisteAsync(notaFiscal.NumeroNotaFiscal))
+            if (await VerificarNotaJaCadastradaUpdateAsync(notaFiscal.NumeroNotaFiscal, notaFiscal.Id))
                 throw new InvalidOperationException("Nota Fiscal já existe.");
 
             try
@@ -100,11 +100,23 @@ namespace Projeto_Transportadora_MVC.Services
             }
         }
 
-        public async Task<bool> NotaFiscalJaExisteAsync(int numeroNotaFiscal, int? idNotaFiscal = null)
+        public async Task<bool> VerificarNotaJaCadastradaCreateAsync(int numeroNotaFiscal)
         {
             try
             {
-                return await _context.NotasFiscais.AnyAsync(nf => nf.NumeroNotaFiscal == numeroNotaFiscal && nf.Id != idNotaFiscal);
+                return await _context.NotasFiscais.AnyAsync(nf => nf.NumeroNotaFiscal == numeroNotaFiscal);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao verificar existência da Nota Fisacl", ex);
+            }
+        }
+
+        public async Task<bool> VerificarNotaJaCadastradaUpdateAsync(int numeroNotaFiscal, int idNotaFiscal)
+        {
+            try
+            {
+                return await _context.NotasFiscais.AnyAsync(nf => nf.NumeroNotaFiscal == numeroNotaFiscal && nf.Id == idNotaFiscal);
             }
             catch (Exception ex)
             {
@@ -125,8 +137,9 @@ namespace Projeto_Transportadora_MVC.Services
                         Id = a.NotaFiscal.Id,
                         NumeroNotaFiscal = a.NotaFiscal.NumeroNotaFiscal,
                         EnderecoFaturado = a.NotaFiscal.EnderecoFaturado,
+                        NomeCliente = a.NotaFiscal.NomeCliente,
                         DataDoFaturamento = a.NotaFiscal.DataDoFaturamento,
-                        
+
                     })
                     .ToListAsync();
             }

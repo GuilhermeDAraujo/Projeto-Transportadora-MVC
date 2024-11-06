@@ -1,4 +1,4 @@
-@* @model Projeto_Transportadora_MVC.Models.NotaFiscal
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
 
 <h1 class="text-center my-4">Excluir Lançamento de Nota Fiscal</h1>
 
@@ -37,10 +37,6 @@
             <input class="form-control" value="@Model.DataDoFaturamento" readonly />
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label class="form-label fw-bold">Data de Entrada</label>
-            <input class="form-control" value="@Model.DataDaEntrada" readonly />
-        </div>
     </div>
 
     <form asp-action="ConfirmarDelete" asp-route-id="@Model.Id" method="post" onsubmit="return confirmExcluir();">
@@ -60,4 +56,4 @@
         var mensagem = `Tem certeza que deseja excluir o Nota Fiscal: \n\nNúmero: ${numeroNotaFiscal}, \nEndereço: ${enderecoDeEntrega}, \nData de Faturamento: ${dataFaturamento}`;
         return confirm(mensagem);
     }
-</script> *@
+</script>

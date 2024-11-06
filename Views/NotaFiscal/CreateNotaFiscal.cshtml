@@ -55,6 +55,7 @@
             <tr>
                 <th>Número da Nota Fiscal</th>
                 <th>Endereço de Faturamento</th>
+                <th>Nome do Cliente</th>
                 <th>Data do Faturamento</th>
                 <th>Ações</th>
             </tr>
@@ -65,6 +66,7 @@
                 <tr>
                     <td>@nota.NumeroNotaFiscal</td>
                     <td>@nota.EnderecoFaturado</td>
+                    <td>@nota.NomeCliente</td>
                     <td>@nota.DataDoFaturamento.ToString("dd/MM/yyyy")</td>
                     <td class="text-center">
                         <a asp-action="UpdateNotaFiscal" asp-route-id="@nota.Id" class="btn btn-warning btn-sm me-2">Editar</a>
@@ -79,10 +81,18 @@ else
 {
     <p class="text-center mt-4">Nenhuma nota fiscal cadastrada.</p>
 }
-
+@if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success mt-4 text-center">
+            @ViewBag.Message
+        </div>
+    }
 @if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger mt-3">
-        @Html.ValidationSummary(false, "Corrija os seguintes erros: ")
+    {
+        <div class="alert alert-danger mt-4 text-center">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
     </div>
 }

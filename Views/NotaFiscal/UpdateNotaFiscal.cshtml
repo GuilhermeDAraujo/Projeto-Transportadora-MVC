@@ -1,4 +1,4 @@
-@* @model Projeto_Transportadora_MVC.Models.NotaFiscal
+@model Projeto_Transportadora_MVC.Models.NotaFiscal
 
 <h1 class="text-center my-4">Atualizar Lançamento de Nota Fiscal</h1>
 
@@ -41,11 +41,6 @@
             <span asp-validation-for="DataDoFaturamento" class="text-danger"></span>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label asp-for="DataDaEntrada" class="form-label fw-bold">Data de Entrada</label>
-            <input asp-for="DataDaEntrada" class="form-control" placeholder="DD/MM/AAAA" />
-            <span asp-validation-for="DataDaEntrada" class="text-danger"></span>
-        </div>
     </div>
 
     <div class="d-flex justify-content-between mt-4">
@@ -59,4 +54,4 @@
     <div class="alert alert-danger mt-3">
         @Html.ValidationSummary(false, "Corrija os seguintes erros: ")
     </div>
-} *@
+}
