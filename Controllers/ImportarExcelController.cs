@@ -20,7 +20,7 @@ namespace Projeto_Transportadora_MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateImportarExcel(IFormFile excelFile)
+        public async Task<IActionResult> CreateImportarExcel(IFormFile excelFile)
         {
             if (excelFile == null || excelFile.Length == 0)
             {
@@ -31,8 +31,8 @@ namespace Projeto_Transportadora_MVC.Controllers
             {
                 using (var stream = excelFile.OpenReadStream())
                 {
-                    var nostasFiscais = _importarExcelService.ImportarNotasFiscais(stream);
-                    ViewBag.Message = $"{nostasFiscais.Count} Notas fiscais importadas com sucesso!";
+                    var notasFiscais = await _importarExcelService.ImportarNotasFiscais(stream); 
+                    ViewBag.Message = $"{notasFiscais.Count} Notas fiscais importadas com sucesso!"; 
                     return View();
                 }
             }

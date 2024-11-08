@@ -14,9 +14,11 @@ namespace Projeto_Transportadora_MVC.Services
             _context = context;
         }
 
-        public List<NotaFiscal> ImportarNotasFiscais(Stream arquivoExcel)
+        public async Task<List<NotaFiscal>> ImportarNotasFiscais(Stream arquivoExcel)
         {
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
             List<NotaFiscal> notasFiscais = new List<NotaFiscal>();
+            List<AcaoNotaFiscal> acaoNotaFiscals = new List<AcaoNotaFiscal>();
 
             using (var package = new ExcelPackage(arquivoExcel))
             {
@@ -33,7 +35,6 @@ namespace Projeto_Transportadora_MVC.Services
                         NomeCliente = planilha.Cells[linha, 2].Text,
                         EnderecoFaturado = planilha.Cells[linha, 3].Text,
                         DataDoFaturamento = DateTime.Parse(planilha.Cells[linha, 4].Text),
-                        // DataDaEntrada = DateTime.Parse(planilha.Cells[linha, 5].Text),
                         NumeroDaCarga = int.Parse(planilha.Cells[linha, 6].Text)
                     };
 
@@ -41,15 +42,24 @@ namespace Projeto_Transportadora_MVC.Services
                         throw new InvalidOperationException($"A nota fiscal {notaFiscal.NumeroNotaFiscal} já existe.");
 
                     notasFiscais.Add(notaFiscal);
+
+                    acaoNotaFiscals.Add(new AcaoNotaFiscal
+                    {
+                        TipoAcao = Enums.TipoAcao.Entrada,
+                        DataDaAcao = DateTime.Now.Date,
+                        Descriacao = "Entrada da Nota Fiscal e aguardando ação",
+                        NotaFiscalId = notaFiscal.Id,
+                        CaminhaoId = 1,
+                        DataAgendada = null,
+                        StatusAgendamento = null
+                    });
                 }
             }
-
-            SalvarNotasFiscais(notasFiscais);
+            SalvarNotasFiscais(notasFiscais, acaoNotaFiscals);
             return notasFiscais;
         }
 
-
-        private void SalvarNotasFiscais(List<NotaFiscal> notasFiscais)
+        private void SalvarNotasFiscais(List<NotaFiscal> notasFiscais, List<AcaoNotaFiscal> acaoNotaFiscals)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
@@ -57,6 +67,10 @@ namespace Projeto_Transportadora_MVC.Services
                 {
                     _context.NotasFiscais.AddRange(notasFiscais);
                     _context.SaveChanges();
+
+                    _context.AcoesNotaFiscal.AddRange(acaoNotaFiscals);
+                    _context.SaveChanges();
+
                     transaction.Commit();
                 }
                 catch (DbUpdateException ex)
