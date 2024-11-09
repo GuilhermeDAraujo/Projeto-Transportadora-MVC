@@ -49,8 +49,12 @@ namespace Projeto_Transportadora_MVC.Services
                     if (_context.NotasFiscais.Any(nf => nf.NumeroNotaFiscal == notaFiscal.NumeroNotaFiscal))
                         throw new InvalidOperationException($"A Nota Fiscal {notaFiscal.NumeroNotaFiscal} já existe");
 
-                    if(_context.NotasFiscais.Any(nf => nf.NomeCliente == null))
+                    if (string.IsNullOrWhiteSpace(notaFiscal.NomeCliente))
                         throw new InvalidOperationException($"A Nota Fiscal {notaFiscal.NumeroNotaFiscal} não contém Nome do Cliente");
+
+                    if (string.IsNullOrWhiteSpace(notaFiscal.EnderecoFaturado))
+                        throw new InvalidOperationException($"A Nota Fiscal {notaFiscal.NumeroNotaFiscal} não contém Endereço");
+
                     notasFisicais.Add(notaFiscal);
                 }
             }
