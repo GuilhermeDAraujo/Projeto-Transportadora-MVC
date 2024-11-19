@@ -15,14 +15,19 @@ namespace Projeto_Transportadora_MVC.Controllers
             _acaoNotaFiscalService = acaoNotaFiscalService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Menu()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Filtrar()
         {
             var notasNaoFiscaisFechadas = await _acaoNotaFiscalService.ObterNotasNaoFechadasAsync();
             await CarregarViewBag();
             return View(notasNaoFiscaisFechadas);
         }
 
-        public async Task<IActionResult> Filtrar(TipoAcao? tipoAcao, DateTime? dataFaturamento)
+        public async Task<IActionResult> FiltrarAcoesFiscais(TipoAcao? tipoAcao, DateTime? dataFaturamento)
         {
             IEnumerable<AcaoNotaFiscal> notas;
 
@@ -36,7 +41,7 @@ namespace Projeto_Transportadora_MVC.Controllers
             }
 
             await CarregarViewBag();
-            return View("Index", notas);
+            return View("Filtrar", notas);
         }
 
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Projeto Transportadora MVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f740808aa8d49ef265ec19fb272a59e9c9b8c9a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a715cefe936b2a11d92e09f13061fda283af99c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Projeto Transportadora MVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Projeto Transportadora MVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
