@@ -28,7 +28,7 @@ namespace Projeto_Transportadora_MVC.Services
         {
             return await _context.AcoesNotaFiscal
                 .Where(a => !tipoAcao.HasValue || a.TipoAcao == tipoAcao.Value)
-                .Where(a => !dataFaturamento.HasValue || a.NotaFiscal.DataDoFaturamento == dataFaturamento.Value)
+                .Where(a => !dataFaturamento.HasValue || a.NotaFiscal.DataDoFaturamento.Value.Date == dataFaturamento.Value.Date)
                 .Include(nf => nf.NotaFiscal)
                 .Include(c => c.Caminhao)
                 .ToListAsync();

@@ -22,7 +22,7 @@ namespace Projeto_Transportadora_MVC.Controllers
             return View(notasNaoFiscaisFechadas);
         }
 
-        public async Task<IActionResult> Filtar(TipoAcao? tipoAcao, DateTime? dataFaturamento)
+        public async Task<IActionResult> Filtrar(TipoAcao? tipoAcao, DateTime? dataFaturamento)
         {
             IEnumerable<AcaoNotaFiscal> notas;
 
@@ -35,6 +35,7 @@ namespace Projeto_Transportadora_MVC.Controllers
                 notas = await _acaoNotaFiscalService.ObterNotasNaoFechadasAsync();
             }
 
+            await CarregarViewBag();
             return View("Index", notas);
         }
 
